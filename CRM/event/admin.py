@@ -1,14 +1,14 @@
 # Django Libs:
 from django.contrib import admin
-from django.contrib.auth.models import User
-from django.contrib.auth.admin import UserAdmin
 # Locals:
 from .models import Event
 
 
 # Register event
 class CustomEvent(admin.ModelAdmin):
-    """ """
+    """
+    Allow Admins to Create/Update/Delete Events.
+    """
     fieldsets = [
         ('Client', {'fields': ['client']}),
         ('support_contact', {'fields': ['support_contact']}),

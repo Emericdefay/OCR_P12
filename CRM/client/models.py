@@ -4,7 +4,19 @@ from django.contrib.auth.models import User
 
 
 class Client(models.Model):
-    """ """
+    """Clients model
+    
+    Fields:
+        - sale_contact
+        - first_name
+        - last_name
+        - email
+        - phone
+        - mobile
+        - company_name
+        - date_created
+        - date_updated
+    """
     sales_contact = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,

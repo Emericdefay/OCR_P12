@@ -4,7 +4,7 @@ import logging
 from django.contrib.auth.models import User
 from django.db.models import Q
 # Django Rest Framework Libs:
-from rest_framework import serializers, viewsets
+from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
 # Locals:
@@ -13,8 +13,7 @@ from .permissions import EventPermissions
 from .serializer import EventSerializer
 from client.models import Client
 from contract.models import Contract
-from user.models import (SalerTHROUGH,
-                         SupportTHROUGH)
+from user.models import SupportTHROUGH
 
 
 logger = logging.getLogger(__name__)
@@ -51,7 +50,7 @@ class EventCRUD(viewsets.ViewSet):
         (HTTP status_code | detail)
         - 401 : JWT authentification failed
     """
-    #permission_classes = (EventPermissions)
+    permission_classes = (EventPermissions)
 
     def list(self, request, client_id, contract_id):
         """
@@ -88,7 +87,8 @@ class EventCRUD(viewsets.ViewSet):
                             status=status.HTTP_404_NOT_FOUND)
 
         # Show all Events from a client
-        events = Event.objects.filter(client=client)
+        events = Event.objects.filter(Q(client=client) &
+                                      Q(event_status=contract))
         
         serialized_events = EventSerializer(events, many=True)
 
@@ -101,7 +101,7 @@ class EventCRUD(viewsets.ViewSet):
             return Response(data=content,
                             status=status.HTTP_204_NO_CONTENT)
 
-    def retrieve(self, request, client_id, pk):
+    def retrieve(self, request, client_id, contract_id, pk):
         """
         GET request
         Method retrieve
@@ -124,7 +124,7 @@ class EventCRUD(viewsets.ViewSet):
             return Response(data=content,
                             status=status.HTTP_404_NOT_FOUND)
         try:
-            contract = Contract.objects.get(Q(id=pk) &
+            contract = Contract.objects.get(Q(id=contract_id) &
                                             Q(client=client))
         except Contract.DoesNotExist:
             content = {"detail": "Contract Doesn't exist."}
@@ -313,9 +313,10 @@ class EventCRUD(viewsets.ViewSet):
                 except Exception:
                     content = {"detail": "Internal Error."}
                     logger.error(content.values())
-                    return Response(data=content,
-                                status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
+                    return Response(
+                        data=content,
+                        status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                        )
                 serialized_event = EventSerializer(event, many=True)
                 return Response(data=serialized_event.data,
                                 status=status.HTTP_200_OK)

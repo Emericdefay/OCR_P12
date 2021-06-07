@@ -7,7 +7,18 @@ from contract.models import Contract
 
 
 class Event(models.Model):
-    """ """
+    """Event model
+    
+    Fields:
+        - client
+        - date_created
+        - date_updated
+        - support_contact
+        - event_status
+        - attendees
+        - event_date
+        - notes
+    """
     client = models.ForeignKey(
         Client,
         on_delete=models.SET_NULL,

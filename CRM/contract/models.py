@@ -4,8 +4,19 @@ from django.contrib.auth.models import User
 # Locals:
 from client.models import Client
 
+
 class Contract(models.Model):
-    """ """
+    """ Contracts model
+
+    Fields:
+        - sales_contact
+        - client
+        - date_created
+        - date_updated
+        - status
+        - amount
+        - payment_due
+    """
     sales_contact = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,

@@ -1,10 +1,8 @@
 # Django Libs
 from django.db.models import Q
-from django.contrib.auth.models import User
 # Django Rest Framework Libs:
 from rest_framework import permissions
 # Locals:
-from .models import Client
 from user.models import (Saler,
                          SalerTHROUGH,
                          Support,
@@ -12,7 +10,7 @@ from user.models import (Saler,
 
 
 class ClientPermissions(permissions.BasePermission):
-    """Projects permissions
+    """Clients permissions
 
     Legend:
     A: All users (Saler & Support)
@@ -43,6 +41,7 @@ class ClientPermissions(permissions.BasePermission):
         if view.action == 'list':
             salers = Saler.objects.values()
             for saler in list(salers):
+                print(saler)
                 if request.user.id == saler["user_id"] :
                     return True
             supports = Support.objects.values()

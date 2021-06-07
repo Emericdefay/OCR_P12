@@ -2,17 +2,16 @@
 import logging
 # Django Libs:
 from django.contrib.auth.models import User
-from django.db.models import Q
+# from django.db.models import Q
 # Django Rest Framework Libs:
-from rest_framework import serializers, viewsets
+from rest_framework import  viewsets
 from rest_framework.response import Response
 from rest_framework import status
 # Locals:
 from .models import Client
 from .permissions import ClientPermissions
 from .serializer import ClientSerializer
-from user.models import (SalerTHROUGH,
-                         SupportTHROUGH)
+from user.models import (SalerTHROUGH)
 
 
 

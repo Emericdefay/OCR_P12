@@ -5,8 +5,7 @@ from rest_framework import permissions
 # Locals:
 from user.models import (Saler,
                          SalerTHROUGH,
-                         Support,
-                         SupportTHROUGH)
+                         Support)
 
 
 class ContractPermissions(permissions.BasePermission):

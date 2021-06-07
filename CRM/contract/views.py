@@ -4,7 +4,7 @@ import logging
 from django.contrib.auth.models import User
 from django.db.models import Q
 # Django Rest Framework Libs:
-from rest_framework import serializers, viewsets
+from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
 # Locals:
@@ -12,8 +12,6 @@ from .models import Contract
 from .permissions import ContractPermissions
 from .serializer import ContractSerializer
 from client.models import Client
-from user.models import (SalerTHROUGH,
-                         SupportTHROUGH)
 
 
 logger = logging.getLogger(__name__)
@@ -49,19 +47,19 @@ class ContractCRUD(viewsets.ViewSet):
         (HTTP status_code | detail)
         - 401 : JWT authentification failed
     """
-    #permission_classes = (ContractPermissions)
+    permission_classes = (ContractPermissions)
 
     def list(self, request, client_id):
         """
         GET request
         Method list
 
-        Show all clients linked to the authenticated user
+        Show all contract linked to the authenticated user
 
         Validate :
             (HTTP status_code | detail)
-            - 200 : clients' list
-            - 204 : No client
+            - 200 : contract' list
+            - 204 : No contract
         Errors :
             (HTTP status_code | detail)
             - 403 : Not permission to list
@@ -75,7 +73,7 @@ class ContractCRUD(viewsets.ViewSet):
             return Response(data=content,
                             status=status.HTTP_404_NOT_FOUND)
         # Show all contracts from a client
-        contracts = Contract.objects.all(client=client)
+        contracts = Contract.objects.filter(client=client)
         
         serialized_contracts = ContractSerializer(contracts, many=True)
 
@@ -93,11 +91,11 @@ class ContractCRUD(viewsets.ViewSet):
         GET request
         Method retrieve
 
-        Get a specific client for the seller|support user.
+        Get a specific contract for the seller|support user.
 
         Validate :
             (HTTP status_code | detail)
-            - 200 : retrieve client
+            - 200 : retrieve contract
         Errors :
             (HTTP status_code | detail)
             - 403 : Not permission to retrieve
@@ -121,7 +119,7 @@ class ContractCRUD(viewsets.ViewSet):
         serialized_contract = ContractSerializer(contract)
         if serialized_contract.data:
             content = serialized_contract.data
-            # Check if user has permission to retrieve this client
+            # Check if user has permission to retrieve this contract
             self.check_object_permissions(request, contract)
             return Response(data=content,
                             status=status.HTTP_200_OK)
@@ -136,7 +134,7 @@ class ContractCRUD(viewsets.ViewSet):
         POST request
         Method create
 
-        Create a new client. Need to be connected to create one.
+        Create a new contract. Need to be connected to create one.
 
         Form:
             - status
@@ -145,7 +143,7 @@ class ContractCRUD(viewsets.ViewSet):
 
         Validate :
             (HTTP status_code | detail)
-            - 201 : created client
+            - 201 : created contract
         Errors :
             (HTTP status_code | detail)
             - 400 : Invalid form
@@ -177,10 +175,10 @@ class ContractCRUD(viewsets.ViewSet):
                 logger.error(content.values())
                 return Response(data=content,
                                 status=status.HTTP_400_BAD_REQUEST)
-            # Saving client
+            # Saving contract
             contract.save()
 
-            # Return client's data
+            # Return client's contract
             serialized_contract = ContractSerializer(contract)
             return Response(data=serialized_contract.data,
                             status=status.HTTP_201_CREATED)

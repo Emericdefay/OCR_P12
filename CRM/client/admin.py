@@ -6,7 +6,9 @@ from .models import Client
 
 # Register client
 class CustomClient(admin.ModelAdmin):
-    """ """
+    """
+    Allow Admins to Create/Update/Delete Clients
+    """
     fieldsets = [
         ('Sales contact', {'fields': ['sales_contact']}),
         ('First name', {'fields': ['first_name']}),

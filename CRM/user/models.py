@@ -7,7 +7,12 @@ from event.models import Event
 
 
 class Support(models.Model):
-    """ """
+    """
+    Support model
+
+    Fields:
+        - user
+    """
     user = models.ForeignKey(
         User,
         null=True,
@@ -16,7 +21,14 @@ class Support(models.Model):
 
 
 class SupportTHROUGH(models.Model):
-    """ """
+    """
+    SupportTHROUGH model
+
+    Fields:
+        - user
+        - event
+        - client
+    """
     user = models.ForeignKey(
         User,
         null=True,
@@ -35,7 +47,12 @@ class SupportTHROUGH(models.Model):
 
 
 class Saler(models.Model):
-    """ """
+    """
+    Saler model
+
+    Fields:
+        - user
+    """
     user = models.ForeignKey(
         User,
         null=True,
@@ -44,7 +61,13 @@ class Saler(models.Model):
 
 
 class SalerTHROUGH(models.Model):
-    """ """
+    """
+    SalerTHROUGH model
+
+    Fields:
+        - user
+        - client
+    """
     user = models.ForeignKey(
         User,
         null=True,

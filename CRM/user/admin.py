@@ -9,7 +9,9 @@ from .models import (Saler,
 
 # Register user
 class CustomUser(UserAdmin):
-    """ """
+    """
+    Allow Admins to Create/Update/Delete Users.
+    """
     fieldsets = [
         ('Username', {'fields': ['username']}),
         ('First name', {'fields': ['first_name']}),
@@ -25,7 +27,9 @@ admin.site.register(User, CustomUser)
 
 # Set role to user
 class Role(admin.ModelAdmin):
-    """ """
+    """
+    Allow Admins to Create/Update/Delete Saler/Support's roles.
+    """
     fieldsets = [
         ('Username', {'fields': ['user']}),
     ]
