@@ -8,6 +8,10 @@ from user.models import (SalerTHROUGH,
                            SupportTHROUGH)
 
 
-class ClientPermissions():
+class ClientPermissions(permissions.BasePermission):
     """ """
-    pass
+    def has_permission(self, request, view):
+        return True
+
+    def has_object_permission(self, request, view, obj):
+        return True

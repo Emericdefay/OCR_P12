@@ -1,9 +1,10 @@
-# Django Libs:
-from django.urls import path
+# Django Rest Framework Libs:
+from rest_framework.routers import SimpleRouter
 # Locals:
 from .views import ClientCRUD
 
 
-urlpatterns = [
-    path("<int:client_id>", ClientCRUD),
-]
+router = SimpleRouter()
+router.register(r'', ClientCRUD, basename='client')
+
+urlpatterns = router.urls

@@ -6,9 +6,13 @@ from rest_framework import permissions
 from .models import Contract
 from client.models import Client
 from user.models import (SalerTHROUGH,
-                           SupportTHROUGH)
+                         SupportTHROUGH)
 
 
 class ContractPermissions(permissions.BasePermission):
     """ """
-    pass
+    def has_permission(self, request, view):
+        return True
+
+    def has_object_permission(self, request, view, obj):
+        return True

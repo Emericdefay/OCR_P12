@@ -1,9 +1,10 @@
-# Django Libs:
-from django.urls import path
+# Django Rest Framework Libs:
+from rest_framework.routers import SimpleRouter
 # Locals:
 from .views import EventCRUD
 
 
-urlpatterns = [
-    path("<int:event_id>", EventCRUD),
-]
+router = SimpleRouter()
+router.register(r'', EventCRUD, basename='event')
+
+urlpatterns = router.urls
