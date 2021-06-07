@@ -41,7 +41,6 @@ class ClientPermissions(permissions.BasePermission):
         if view.action == 'list':
             salers = Saler.objects.values()
             for saler in list(salers):
-                print(saler)
                 if request.user.id == saler["user_id"] :
                     return True
             supports = Support.objects.values()
@@ -76,17 +75,17 @@ class ClientPermissions(permissions.BasePermission):
             1': update
         """
         if view.action == 'retrieve':
-            user_id = request.user.id
-            support_user = SupportTHROUGH.objects.filter(Q(user_id=user_id) &
-                                                         Q(client_id=obj.id))
-            saler_user = SalerTHROUGH.objects.filter(Q(user_id=user_id) &
-                                                     Q(client_id=obj.id))
+            user = request.user.id
+            support_user = SupportTHROUGH.objects.filter(Q(user=user) &
+                                                         Q(client=obj.id))
+            saler_user = SalerTHROUGH.objects.filter(Q(user=user) &
+                                                     Q(client=obj.id))
             if support_user or saler_user:
                 return True
         if view.action == 'update':
-            user_id = request.user.id
-            saler_user = SalerTHROUGH.objects.filter(Q(user_id=user_id) &
-                                                     Q(client_id=obj.id))
+            user = request.user.id
+            saler_user = SalerTHROUGH.objects.filter(Q(user=user) &
+                                                     Q(client=obj.id))
             if saler_user:
                 return True
         return False
