@@ -1,10 +1,8 @@
 # Django Libs:
 from django.urls import path
 # Django Rest Framework Libs:
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-)
+from rest_framework_simplejwt.views import (TokenObtainPairView,
+                                            TokenRefreshView)
 
 
 urlpatterns = [

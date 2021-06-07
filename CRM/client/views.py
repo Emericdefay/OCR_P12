@@ -49,7 +49,7 @@ class ClientCRUD(viewsets.ViewSet):
         (HTTP status_code | detail)
         - 401 : JWT authentification failed
     """
-    #permission_classes = (ClientPermissions)
+    permission_classes = [ClientPermissions,]
 
     def list(self, request):
         """
@@ -150,6 +150,7 @@ class ClientCRUD(viewsets.ViewSet):
             sale_contact = User.objects.get(id=request.user.id)
             try:
                 content["sales_contact"] = sale_contact
+                print(content)
                 client = Client(**content)
             except Exception:
                 content = {"detail": "Form invalid."}
@@ -162,7 +163,7 @@ class ClientCRUD(viewsets.ViewSet):
             try:
                 saler = dict()
                 saler["user_id"] = sale_contact
-                saler["pk"] = client
+                saler["client_id"] = client
                 contact = SalerTHROUGH(**saler)
             except Exception:
                 content = {"detail": "Saler couldn't be added."}

@@ -3,12 +3,12 @@ from django.contrib import admin
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin
 # Locals:
-from .models import (SalerTHROUGH,
-                     SupportTHROUGH)
+from .models import (Saler,
+                     Support)
 
 
 # Register user
-class CustomUser(admin.ModelAdmin):
+class CustomUser(UserAdmin):
     """ """
     fieldsets = [
         ('Username', {'fields': ['username']}),
@@ -21,3 +21,14 @@ class CustomUser(admin.ModelAdmin):
 
 admin.site.unregister(User)
 admin.site.register(User, CustomUser)
+
+
+# Set role to user
+class Role(admin.ModelAdmin):
+    """ """
+    fieldsets = [
+        ('Username', {'fields': ['user']}),
+    ]
+
+admin.site.register(Saler, Role)
+admin.site.register(Support, Role)
