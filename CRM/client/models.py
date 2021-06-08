@@ -7,7 +7,7 @@ class Client(models.Model):
     """Clients model
     
     Fields:
-        - sale_contact
+        - sales_contact
         - first_name
         - last_name
         - email

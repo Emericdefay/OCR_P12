@@ -50,7 +50,7 @@ class EventCRUD(viewsets.ViewSet):
         (HTTP status_code | detail)
         - 401 : JWT authentification failed
     """
-    permission_classes = (EventPermissions)
+    permission_classes = [EventPermissions]
 
     def list(self, request, client_id, contract_id):
         """

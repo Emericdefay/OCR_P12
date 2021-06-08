@@ -47,7 +47,7 @@ class ContractCRUD(viewsets.ViewSet):
         (HTTP status_code | detail)
         - 401 : JWT authentification failed
     """
-    permission_classes = (ContractPermissions)
+    permission_classes = [ContractPermissions]
 
     def list(self, request, client_id):
         """
