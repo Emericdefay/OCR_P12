@@ -13,7 +13,7 @@ from .permissions import EventPermissions
 from .serializer import EventSerializer
 from client.models import Client
 from contract.models import Contract
-from user.models import SupportTHROUGH
+from user.models import Support, SupportTHROUGH
 
 
 logger = logging.getLogger(__name__)
@@ -174,6 +174,7 @@ class EventCRUD(viewsets.ViewSet):
             - 400 : Invalid form
             - 403 : Not permission to create
             - 404 : Element not found
+            - 406 : Support User not acceptable
             - 500 : Internal error when added support
         """
         try:
@@ -200,11 +201,28 @@ class EventCRUD(viewsets.ViewSet):
                             status=status.HTTP_400_BAD_REQUEST)
         if content:
             try:
-                support_user = User.objects.get(id=content["support_contact"])
-                content["client"] = client
-                content["event_status"] = contract
-                content['support_contact'] = support_user
-                event = Event(**content)
+                username = content['support_contact']
+                try:
+                    support_user = User.objects.get(username=username)
+                except User.DoesNotExist:
+                    content = {"detail": "User doesn't exist."}
+                    logger.error(content.values())
+                    return Response(data=content,
+                                    status=status.HTTP_400_BAD_REQUEST)
+                # Check if support user has Support role
+                check_is_support = Support.objects.filter(
+                    user=support_user
+                )
+                if check_is_support:
+                    content["client"] = client
+                    content["event_status"] = contract
+                    content['support_contact'] = support_user
+                    event = Event(**content)
+                else:
+                    content = {"detail": "This user is not a support."}
+                    logger.error(content.values())
+                    return Response(data=content,
+                                    status=status.HTTP_406_NOT_ACCEPTABLE)
             except Exception:
                 content = {"detail": "Form invalid."}
                 logger.error(content.values())
@@ -216,8 +234,9 @@ class EventCRUD(viewsets.ViewSet):
             # Add support
             try:
                 support = dict()
-                support["user_id"] = support_user
-                support['event_id'] = event
+                support["user"] = support_user
+                support['client'] = client
+                support['event'] = event
                 contact = SupportTHROUGH(**support)
             except Exception:
                 content = {"detail": "Support couldn't be added."}
@@ -293,7 +312,7 @@ class EventCRUD(viewsets.ViewSet):
             return Response(data=content,
                             status=status.HTTP_400_BAD_REQUEST)
         if content:
-            if content['support_contact']:
+            if 'support_contact' in content:
                 try:
                     event.update(**content)
                 except Exception:

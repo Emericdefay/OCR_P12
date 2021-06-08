@@ -9,10 +9,10 @@ class Contract(models.Model):
     """ Contracts model
 
     Fields:
-        - sales_contact
-        - client
-        - date_created
-        - date_updated
+        - sales_contact*
+        - client*
+        - date_created*
+        - date_updated*
         - status
         - amount
         - payment_due

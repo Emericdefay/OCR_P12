@@ -10,11 +10,11 @@ class Event(models.Model):
     """Event model
     
     Fields:
-        - client
-        - date_created
-        - date_updated
+        - client*
+        - date_created*
+        - date_updated*
         - support_contact
-        - event_status
+        - event_status*
         - attendees
         - event_date
         - notes

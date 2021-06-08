@@ -174,7 +174,16 @@ class TestContract(APITestCase):
         user = User.objects.get(username='saler')
         self.client.force_authenticate(user=user)
         url = 'http://127.0.0.1:8000/client/1/contract/'
-        pass
+        d = datetime.datetime(2015, 10, 9, 23, 55, 59, 342380)
+        contract_form = {
+            'status': False,
+            'amount': 10.0,
+            'payment_due': d,
+        }
+        url = 'http://127.0.0.1:8000/client/1/contract/'
+        self.client.post(path=url, data=contract_form)
+        response = self.client.get(path=url)
+        self.assertEqual(response.status_code, 200)
 
     def test_SaU_cc_th(self):
         """Test
