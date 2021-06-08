@@ -9,7 +9,7 @@ from user.models import (Saler, Support, SupportTHROUGH)
 
 class TestClient(APITestCase):
     """Tests for client management.
-    
+
     Legend :
         '+': Has permission
         '=': Permission if linked to client
@@ -43,9 +43,9 @@ class TestClient(APITestCase):
     """
     def setUp(self):
         """Setup
-        
+
         Users:
-            - Saler User 
+            - Saler User
             - Saler User NOT THROUGH
             - Support User THROUGH
             - Support User NOT THROUGH
@@ -297,7 +297,6 @@ class TestClient(APITestCase):
         response = self.client.delete(path=url)
         self.assertEqual(response.status_code, 403)
 
-
     def test_SuU_lc_e(self):
         """Test -> Empty list
         Support User/
@@ -331,7 +330,6 @@ class TestClient(APITestCase):
         self.client.force_authenticate(user=user)
         response = self.client.get(path=url)
         self.assertEqual(response.status_code, 200)
-
 
     def test_SuU_cc(self):
         """Test
@@ -373,7 +371,7 @@ class TestClient(APITestCase):
 
         user = User.objects.get(username='support')
         client = Client.objects.get(first_name='test')
-        
+
         # Make support THROUGH
         through = {
             'user': user,
@@ -433,7 +431,7 @@ class TestClient(APITestCase):
         user = User.objects.get(username='support')
         self.client.force_authenticate(user=user)
         client = Client.objects.get(first_name='test')
-        
+
         # Make support THROUGH
         through = {
             'user': user,
@@ -469,7 +467,7 @@ class TestClient(APITestCase):
 
         user = User.objects.get(username='support')
         client = Client.objects.get(first_name='test')
-        
+
         # Make support THROUGH
         through = {
             'user': user,
@@ -481,7 +479,6 @@ class TestClient(APITestCase):
         url = 'http://127.0.0.1:8000/client/1/'
         response = self.client.delete(path=url)
         self.assertEqual(response.status_code, 403)
-
 
     def test_UWoR_lc(self):
         """Test - empty list
@@ -511,7 +508,7 @@ class TestClient(APITestCase):
             'company_name': 'test',
         }
         self.client.post(path=url, data=client_form)
-        
+
         user = User.objects.get(username='user')
         self.client.force_authenticate(user=user)
         response = self.client.get(path=url)
@@ -610,7 +607,6 @@ class TestClient(APITestCase):
         url = 'http://127.0.0.1:8000/client/1/'
         response = self.client.delete(path=url)
         self.assertEqual(response.status_code, 403)
-
 
     def test_UU_lc(self):
         """Test

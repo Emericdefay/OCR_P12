@@ -74,7 +74,7 @@ class ContractCRUD(viewsets.ViewSet):
                             status=status.HTTP_404_NOT_FOUND)
         # Show all contracts from a client
         contracts = Contract.objects.filter(client=client)
-        
+
         serialized_contracts = ContractSerializer(contracts, many=True)
 
         if serialized_contracts.data:

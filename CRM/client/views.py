@@ -2,9 +2,8 @@
 import logging
 # Django Libs:
 from django.contrib.auth.models import User
-# from django.db.models import Q
 # Django Rest Framework Libs:
-from rest_framework import  viewsets
+from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
 # Locals:
@@ -12,7 +11,6 @@ from .models import Client
 from .permissions import ClientPermissions
 from .serializer import ClientSerializer
 from user.models import (SalerTHROUGH)
-
 
 
 logger = logging.getLogger(__name__)
@@ -48,7 +46,7 @@ class ClientCRUD(viewsets.ViewSet):
         (HTTP status_code | detail)
         - 401 : JWT authentification failed
     """
-    permission_classes = [ClientPermissions,]
+    permission_classes = [ClientPermissions]
 
     def list(self, request):
         """
@@ -67,7 +65,7 @@ class ClientCRUD(viewsets.ViewSet):
         """
         # Show all clients
         clients = Client.objects.all()
-        
+
         serialized_clients = ClientSerializer(clients, many=True)
 
         if serialized_clients.data:

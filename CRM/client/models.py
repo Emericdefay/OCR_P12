@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 class Client(models.Model):
     """Clients model
-    
+
     Fields:
         - sales_contact
         - first_name

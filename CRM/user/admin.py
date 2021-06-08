@@ -34,5 +34,6 @@ class Role(admin.ModelAdmin):
         ('Username', {'fields': ['user']}),
     ]
 
+
 admin.site.register(Saler, Role)
 admin.site.register(Support, Role)

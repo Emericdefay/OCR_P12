@@ -89,7 +89,7 @@ class EventCRUD(viewsets.ViewSet):
         # Show all Events from a client
         events = Event.objects.filter(Q(client=client) &
                                       Q(event_status=contract))
-        
+
         serialized_events = EventSerializer(events, many=True)
 
         if serialized_events.data:

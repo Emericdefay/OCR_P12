@@ -8,7 +8,7 @@ from contract.models import Contract
 
 class Event(models.Model):
     """Event model
-    
+
     Fields:
         - client*
         - date_created*

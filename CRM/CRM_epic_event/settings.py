@@ -1,3 +1,4 @@
+# flake8: noqa
 """
 Django settings for CRM_epic_event project.
 
@@ -48,7 +49,6 @@ INSTALLED_APPS = [
     'contract.apps.ContractConfig',
     'event.apps.EventConfig',
     'user.apps.UserConfig',
-    
 ]
 
 MIDDLEWARE = [

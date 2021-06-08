@@ -41,7 +41,7 @@ class ClientPermissions(permissions.BasePermission):
         if view.action == 'list':
             salers = Saler.objects.values()
             for saler in list(salers):
-                if request.user.id == saler["user_id"] :
+                if request.user.id == saler["user_id"]:
                     return True
             supports = Support.objects.values()
             for support in list(supports):
@@ -50,12 +50,12 @@ class ClientPermissions(permissions.BasePermission):
         if view.action == 'create':
             salers = Saler.objects.values()
             for saler in list(salers):
-                if request.user.id == saler["user_id"] :
+                if request.user.id == saler["user_id"]:
                     return True
         if view.action == 'retrieve':
             salers_th = SalerTHROUGH.objects.values()
             for saler in list(salers_th):
-                if request.user.id == saler["user_id"] :
+                if request.user.id == saler["user_id"]:
                     return True
             supports_th = SupportTHROUGH.objects.values()
             for support in list(supports_th):
@@ -64,7 +64,7 @@ class ClientPermissions(permissions.BasePermission):
         if view.action == 'update':
             salers_th = SalerTHROUGH.objects.values()
             for saler in list(salers_th):
-                if request.user.id == saler["user_id"] :
+                if request.user.id == saler["user_id"]:
                     return True
         return False
 

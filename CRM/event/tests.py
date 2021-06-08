@@ -7,16 +7,14 @@ from rest_framework.test import APITestCase
 # Locals:
 from client.models import Client
 from contract.models import Contract
-from event.models import Event
 from user.models import (Saler,
                          SalerTHROUGH,
-                         Support,
-                         SupportTHROUGH)
+                         Support)
 
 
 class TestEvent(APITestCase):
     """Tests for event management.
-    
+
     Legend :
         '+': Has permission
         '=': Permission if linked to event
@@ -50,14 +48,14 @@ class TestEvent(APITestCase):
     """
     def setUp(self):
         """Setup
-        
+
         Users:
             - Saler
             - Saler not THROUGH
             - Support
             - Support not THROUGH
             - User Without Role
-        
+
         Client:
             - Client
         Contract:
@@ -95,7 +93,7 @@ class TestEvent(APITestCase):
         saler_user = Saler(**saler_form)
         saler_user.save()
 
-                # (Support) User
+        # (Support) User
         user_form = {
             'username': 'support',
             'last_name': 'support',

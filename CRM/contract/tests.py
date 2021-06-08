@@ -13,7 +13,7 @@ from user.models import (Saler,
 
 class TestContract(APITestCase):
     """Tests for contract management.
-    
+
     Legend :
         '+': Has permission
         '=': Permission if linked to contract
@@ -89,7 +89,7 @@ class TestContract(APITestCase):
         saler_user = Saler(**saler_form)
         saler_user.save()
 
-                # (Support) User
+        # (Support) User
         user_form = {
             'username': 'support',
             'last_name': 'support',
@@ -154,8 +154,7 @@ class TestContract(APITestCase):
         through = SalerTHROUGH(**through_form)
         through.save()
 
-
-    def test_SaU_lc(self):
+    def test_SaU_lc_e(self):
         """Test -> no contract
             Saler User/
                 + list contracts
@@ -166,7 +165,7 @@ class TestContract(APITestCase):
         response = self.client.get(path=url)
         self.assertEqual(response.status_code, 204)
 
-    def test_SaU_lc(self):
+    def test_SaU_lc_ne(self):
         """Test -> available contract(s)
             Saler User/
                 + list contracts
@@ -481,7 +480,7 @@ class TestContract(APITestCase):
             'status': False,
             'amount': 10.0,
             'payment_due': d,
-        }        
+        }
         response = self.client.post(path=url, data=contract_form)
         self.assertEqual(response.status_code, 403)
 
