@@ -63,6 +63,7 @@ class ContractCRUD(viewsets.ViewSet):
         Errors :
             (HTTP status_code | detail)
             - 403 : Not permission to list
+            - 404 : Element not found
         """
         # Check if client exist
         try:
@@ -148,7 +149,7 @@ class ContractCRUD(viewsets.ViewSet):
             (HTTP status_code | detail)
             - 400 : Invalid form
             - 403 : Not permission to create
-            - 500 : Internal error when added saler
+            - 404 : Element not found
         """
         try:
             client = Client.objects.get(id=client_id)

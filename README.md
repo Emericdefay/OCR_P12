@@ -89,7 +89,7 @@ Don't forget to Switch back to postgreSQL when finish testing.
 
 ## 🎈 Usage <a name = "usage"></a>
 
-<p>Once you ran the server, you can check those endpoints and get documentation on them from the <a href="https://documenter.getpostman.com/view/15717033/TzXwFyk3">Postman API Collection</a>.</p>
+<p>Once you ran the server, you can check those endpoints and get documentation on them from the <a href="https://www.getpostman.com/collections/e86e9399535e81956723">Postman API Collection</a>.</p>
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 

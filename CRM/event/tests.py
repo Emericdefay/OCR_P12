@@ -7,9 +7,11 @@ from rest_framework.test import APITestCase
 # Locals:
 from client.models import Client
 from contract.models import Contract
+from event.models import Event
 from user.models import (Saler,
                          SalerTHROUGH,
-                         Support)
+                         Support,
+                         SupportTHROUGH)
 
 
 class TestEvent(APITestCase):
@@ -389,8 +391,20 @@ class TestEvent(APITestCase):
         }
         self.client.post(path=url, data=event_form)
 
+        client = Client.objects.get(id=1)
+        event = Event.objects.get(id=1)
+
         user = User.objects.get(username='support')
         self.client.force_authenticate(user=user)
+        # Make support THROUGH
+        through = {
+            'user': user,
+            'client': client,
+            'event': event,
+        }
+        support_through = SupportTHROUGH(**through)
+        support_through.save()
+
         url = 'http://127.0.0.1:8000/client/1/contract/1/event/1/'
         response = self.client.get(path=url)
         self.assertEqual(response.status_code, 200)
@@ -437,8 +451,20 @@ class TestEvent(APITestCase):
         }
         self.client.post(path=url, data=event_form)
 
+        client = Client.objects.get(id=1)
+        event = Event.objects.get(id=1)
+
         user = User.objects.get(username='support')
         self.client.force_authenticate(user=user)
+        # Make support THROUGH
+        through = {
+            'user': user,
+            'client': client,
+            'event': event,
+        }
+        support_through = SupportTHROUGH(**through)
+        support_through.save()
+        
         url = 'http://127.0.0.1:8000/client/1/contract/1/event/1/'
         event_update = {
             'attendees': 2,

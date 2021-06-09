@@ -231,20 +231,22 @@ class EventCRUD(viewsets.ViewSet):
             # Saving event
             event.save()
 
+            # ADMIN TASK : DEBUG OPTION
             # Add support
-            try:
-                support = dict()
-                support["user"] = support_user
-                support['client'] = client
-                support['event'] = event
-                contact = SupportTHROUGH(**support)
-            except Exception:
-                content = {"detail": "Support couldn't be added."}
-                logger.error(content.values())
-                return Response(data=content,
-                                status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            # try:
+                # support = dict()
+                # support["user"] = support_user
+                # support['client'] = client
+                # support['event'] = event
+                # contact = SupportTHROUGH(**support)
+            # except Exception:
+                # content = {"detail": "Support couldn't be added."}
+                # logger.error(content.values())
+                # return Response(data=content,
+                                # status=status.HTTP_500_INTERNAL_SERVER_ERROR)
             # Saving support
-            contact.save()
+            # contact.save()
+            # END DEBUG
 
             # Return client's data
             serialized_event = EventSerializer(event)
@@ -320,22 +322,24 @@ class EventCRUD(viewsets.ViewSet):
                     logger.error(content.values())
                     return Response(data=content,
                                     status=status.HTTP_400_BAD_REQUEST)
-                try:
-                    support_TH = SupportTHROUGH.objects.filter(event_id=pk)
-                    support = User.objects.get(id=content['support_contact'])
-                    support_TH.update(support)
-                except SupportTHROUGH.DoesNotExist:
-                    content = {"detail": "Support doesn't exist."}
-                    logger.error(content.values())
-                    return Response(data=content,
-                                    status=status)
-                except Exception:
-                    content = {"detail": "Internal Error."}
-                    logger.error(content.values())
-                    return Response(
-                        data=content,
-                        status=status.HTTP_500_INTERNAL_SERVER_ERROR
-                        )
+                # ADMIN TASK : DEBUG OPTION
+                # try:
+                #     support_TH = SupportTHROUGH.objects.filter(event_id=pk)
+                #     support = User.objects.get(id=content['support_contact'])
+                #     support_TH.update(support)
+                # except SupportTHROUGH.DoesNotExist:
+                #     content = {"detail": "Support doesn't exist."}
+                #     logger.error(content.values())
+                #     return Response(data=content,
+                #                     status=status)
+                # except Exception:
+                #     content = {"detail": "Internal Error."}
+                #     logger.error(content.values())
+                #     return Response(
+                #         data=content,
+                #         status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                #         )
+                # END DEBUG
                 serialized_event = EventSerializer(event, many=True)
                 return Response(data=serialized_event.data,
                                 status=status.HTTP_200_OK)
