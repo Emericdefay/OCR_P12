@@ -464,7 +464,7 @@ class TestEvent(APITestCase):
         }
         support_through = SupportTHROUGH(**through)
         support_through.save()
-        
+
         url = 'http://127.0.0.1:8000/client/1/contract/1/event/1/'
         event_update = {
             'attendees': 2,
