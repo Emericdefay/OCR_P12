@@ -80,11 +80,9 @@ If you want to check the PEP8 from the code :
 
 For potential future updates, tests have been made.<br>
 To launch tests :
-- Go to CRM/CRM_epic_event/settings.py
-- Switch from postgreSQL DATABASE to sqlite3
+- from OCR/P12, change branch -> tests : `git checkout tests`
 - Instead of running server `python CRM/manage.py test`
-
-Don't forget to Switch back to postgreSQL when finish testing.
+- When tests are done, switch bach to main : `git checkout main`
 
 
 ## 🎈 Usage <a name = "usage"></a>
