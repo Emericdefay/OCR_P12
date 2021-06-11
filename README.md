@@ -86,7 +86,8 @@ To launch tests :
 
 ## 🎈 Usage <a name = "usage"></a>
 
-<p>Once you ran the server, you can check those endpoints and get documentation on them from the <a href="https://www.getpostman.com/collections/e86e9399535e81956723">Postman API Collection</a>.</p>
+<p>Once you ran the server, you can check those endpoints and get documentation on them from the <a href="https://documenter.getpostman.com/view/15717033/TzeTH8pK">Postman API Documentation</a>.</p>
+<p>The collection : <a href="https://www.getpostman.com/collections/e86e9399535e81956723">Postman API Collection</a>.</p>
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
